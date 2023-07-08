@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 
 import automatizado.PO.GooglePO;
 
@@ -32,8 +31,6 @@ public class GoogleTeste extends BaseGoogle {
 
     @Test
     public void BuscarResultados(){
-
-        
           googlePage.inputPesquisa.sendKeys("Batata frita"+ Keys.ENTER);
           String elemento = googlePage.div.getText();
         
