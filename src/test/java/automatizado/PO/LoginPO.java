@@ -1,10 +1,10 @@
 package automatizado.PO;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import automatizado.test.BaseTesteLogin;
 
 public class LoginPO extends BasePO {
 
@@ -14,10 +14,10 @@ public class LoginPO extends BasePO {
     }
 
     @FindBy(id = "email")
-    public WebElement inputEmail;
+    public static WebElement inputEmail;
 
     @FindBy(id = "senha")
-    public WebElement inputSenha;
+    public static WebElement inputSenha;
 
     @FindBy(id = "btn-entrar")
     public WebElement buttonEntrar;
@@ -29,5 +29,15 @@ public class LoginPO extends BasePO {
         return driver.getTitle();
     }
 
+
+    public static void LogarComNomex(String email, String senha)
+    {
+        inputEmail.sendKeys(email,Keys.ENTER);
+        inputSenha.sendKeys(senha,Keys.ENTER);
+
+    }
+
+
+  
 
 }

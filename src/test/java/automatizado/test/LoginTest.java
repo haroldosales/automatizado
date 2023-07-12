@@ -1,9 +1,13 @@
 package automatizado.test;
 
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
+
 import automatizado.PO.LoginPO;
 
 public class LoginTest extends BaseTesteLogin {
@@ -17,81 +21,82 @@ public class LoginTest extends BaseTesteLogin {
     @Test
     public void TesteComLoginErrado() {
 
-        loginPage.inputEmail.sendKeys("Aadmin@admin.com");
-        loginPage.inputSenha.sendKeys("admin@123");
+                        loginPage.LogarComNomex("Aadmin@admin.com","admin@123");
+
+        
         loginPage.buttonEntrar.click();
 
         String elemento = loginPage.spanMensagem.getText();
 
-        Assert.assertTrue(elemento, elemento.contains("E-mail ou senha inválidos"));
+        Assert.assertEquals(elemento, "Informe usuário e senha, os campos não podem ser brancos.");
     }
 
     @Test
     public void TesteComLoginEsenhaErrado() {
 
-        loginPage.inputEmail.sendKeys("Aadmin@admin.com");
-        loginPage.inputSenha.sendKeys("teste");
+                loginPage.LogarComNomex("Aadmin@admin.com","teste");
+
         loginPage.buttonEntrar.click();
 
         String elemento = loginPage.spanMensagem.getText();
 
-        Assert.assertTrue(elemento, elemento.contains("E-mail ou senha inválidos"));
+        Assert.assertEquals(elemento, "Informe usuário e senha, os campos não podem ser brancos.");
     }
 
     @Test
     public void TesteComLoginErradoESenhaEmBranco() {
 
-        loginPage.inputEmail.sendKeys("teste");
-        loginPage.inputSenha.sendKeys(" ");
+                loginPage.LogarComNomex("teste","");
+
         loginPage.buttonEntrar.click();
 
         String elemento = loginPage.spanMensagem.getText();
 
-        Assert.assertTrue(elemento, elemento.contains("E-mail ou senha inválidos"));
+        Assert.assertEquals(elemento, "Informe usuário e senha, os campos não podem ser brancos.");
     }
 
     @Test
     public void TesteComDadosEmBranco() {
 
-        loginPage.inputEmail.sendKeys(" ");
-        loginPage.inputSenha.sendKeys(" ");
+        loginPage.LogarComNomex("","");
+
         loginPage.buttonEntrar.click();
 
         String elemento = loginPage.spanMensagem.getText();
 
-        Assert.assertTrue(elemento, elemento.contains("Informe usuário e senha, os campos não podem ser branco"));
+        Assert.assertEquals(elemento, "Informe usuário e senha, os campos não podem ser brancos.");
     }
 
     @Test
     public void TesteComLoginEmBrancoEsenhaErrado() {
 
-        loginPage.inputEmail.sendKeys(" ");
-        loginPage.inputSenha.sendKeys("teste");
+     
+                loginPage.LogarComNomex("null","teste");
+
         loginPage.buttonEntrar.click();
 
         String elemento = loginPage.spanMensagem.getText();
 
-        Assert.assertTrue(elemento, elemento.contains("Informe usuário e senha, os campos não podem ser branco"));
+        Assert.assertEquals(elemento, "Informe usuário e senha, os campos não podem ser brancos.");
     }
 
     @Test
     public void TesteComLoginErradoEsenhaErrado() {
+        
+        loginPage.LogarComNomex("teste","teste");
 
-        loginPage.inputEmail.sendKeys("teste");
-        loginPage.inputSenha.sendKeys("teste");
         loginPage.buttonEntrar.click();
 
         String elemento = loginPage.spanMensagem.getText();
 
-        Assert.assertTrue(elemento, elemento.contains("E-mail ou senha inválidos"));
+        Assert.assertEquals(elemento, "Informe usuário e senha, os campos não podem ser brancos.");
     }
 
     @Test
     public void LoginSucesso() {
 
-        loginPage.inputEmail.sendKeys("admin@admin.com");
-        loginPage.inputSenha.sendKeys("admin@123");
-        loginPage.buttonEntrar.click();
+     
+        loginPage.LogarComNomex("admin@admin.com","admin@123");
 
         Assert.assertEquals(loginPage.PegarTitulo(), "Controle de Produtos");
 
